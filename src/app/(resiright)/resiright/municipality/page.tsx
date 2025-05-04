@@ -9,8 +9,9 @@ import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown, MoreHorizontal } from "lucide-react";
 import { FC, useState } from "react";
 import AddMunicipalityDialog from "./add-municipality-dialog";
+import { useRouter } from "next/navigation";
 
-const MunicipalityPage: FC = () => {
+const MunicipalitiesPage: FC = () => {
     const [isAddMunicipalityDialogOpen, setIsAddMunicipalityDialogOpen] = useState(false);
     const columns: ColumnDef<Municipality>[] = [
         {
@@ -76,6 +77,12 @@ const MunicipalityPage: FC = () => {
             },
         },
     ];
+    const router = useRouter();
+
+    const onRowClicked = (rowData: any) => {
+        console.log(rowData);
+        router.push(`/resiright/municipality/${rowData.original.id}`);
+    }
 
     return <div className="flex flex-col ">
         <div className="flex flex-col">
@@ -83,9 +90,9 @@ const MunicipalityPage: FC = () => {
             <span className="text-lg text-gray-500">Manage your municipalities</span>
         </div>
         <hr className="mt-2.5 mb-3" />
-        <TableCustom columns={columns} url={MUNICIPALITY_URL} onAdd={() => setIsAddMunicipalityDialogOpen(true)}/>
+        <TableCustom columns={columns} url={MUNICIPALITY_URL} onAdd={() => setIsAddMunicipalityDialogOpen(true)} onRowClicked={onRowClicked}/>
         <AddMunicipalityDialog isOpen={isAddMunicipalityDialogOpen} setIsOpen={setIsAddMunicipalityDialogOpen} />
     </div>
 }
 
-export default MunicipalityPage;
+export default MunicipalitiesPage;

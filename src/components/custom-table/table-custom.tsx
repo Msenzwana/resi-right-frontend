@@ -12,14 +12,15 @@ interface TableCustomProps {
     url: string;
     columns: ColumnDef<any>[];
     onAdd?: () => void;
+    onRowClicked: (rowData: any) => void;
 }
 const fetcher = (url: string) => fetch(url).then((res) => res.json())
 
-const TableCustom: FC<TableCustomProps> = ({ url, columns, onAdd }) => {
+const TableCustom: FC<TableCustomProps> = ({ url, columns, onAdd, onRowClicked }) => {
     const [sorting, setSorting] = useState<SortingState>([])
     const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
     const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
-    const [rowSelection, setRowSelection] = useState({})
+    // const [rowSelection, setRowSelection] = useState({})
     const { error, data, isLoading } = useSWR(url, fetcher)
 
     const table = useReactTable({
@@ -32,12 +33,12 @@ const TableCustom: FC<TableCustomProps> = ({ url, columns, onAdd }) => {
         getSortedRowModel: getSortedRowModel(),
         getFilteredRowModel: getFilteredRowModel(),
         onColumnVisibilityChange: setColumnVisibility,
-        onRowSelectionChange: setRowSelection,
+        // onRowSelectionChange: setRowSelection,
         state: {
             sorting,
             columnFilters,
             columnVisibility,
-            rowSelection,
+            // rowSelection,
         },
     })
 
@@ -50,7 +51,7 @@ const TableCustom: FC<TableCustomProps> = ({ url, columns, onAdd }) => {
             error ? getError() :
                 <>
                     <TableSearch table={table} onAdd={onAdd} />
-                    <TableContent table={table} columns={columns} />
+                    <TableContent table={table} columns={columns} onRowClicked={onRowClicked}/>
                     <Pagination table={table} />
                 </>}
     </div>

@@ -7,14 +7,17 @@ import {
     TableRow,
 } from "@/components/ui/table";
 import { ColumnDef, flexRender, Table as TableType } from "@tanstack/react-table";
+import { useRouter } from "next/navigation";
 import { FC } from "react";
 
 interface TableContentProps {
     table: TableType<any>;
     columns: ColumnDef<any>[];
+    onRowClicked: (rowData: any) => void;
 }
 
-const TableContent: FC<TableContentProps> = ({ table, columns }) => {
+const TableContent: FC<TableContentProps> = ({ table, columns, onRowClicked }) => {
+    
     return <div className="rounded-md border">
         <Table>
             <TableHeader>
@@ -35,12 +38,13 @@ const TableContent: FC<TableContentProps> = ({ table, columns }) => {
                     </TableRow>
                 ))}
             </TableHeader>
-            <TableBody>
+            <TableBody className="hover:cursor-pointer">
                 {table.getRowModel().rows?.length ? (
                     table.getRowModel().rows.map((row) => (
                         <TableRow
                             key={row.id}
                             data-state={row.getIsSelected() && "selected"}
+                            onClick={(e) => onRowClicked(row)}
                         >
                             {row.getVisibleCells().map((cell) => (
                                 <TableCell key={cell.id}>

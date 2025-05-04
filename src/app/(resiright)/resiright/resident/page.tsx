@@ -9,8 +9,9 @@ import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown, MoreHorizontal } from "lucide-react";
 import { FC, useState } from "react";
 import AddResidentDialog from "./add-resident-dialog";
+import { useRouter } from "next/navigation";
 
-const ResidentPage: FC = () => {
+const ResidentsPage: FC = () => {
     const [isAddResidentDialogOpen, setIsAddResidentDialogOpen] = useState(false);
     const columns: ColumnDef<Resident>[] = [
         {
@@ -69,15 +70,22 @@ const ResidentPage: FC = () => {
             },
         },
     ];
+    const router = useRouter();
+
+    const onRowClicked = (rowData: any) => {
+        console.log(rowData);
+        router.push(`/resiright/resident/${rowData.original.id}`)
+    }
+
     return <div className="flex flex-col ">
         <div className="flex flex-col">
             <span className="text-4xl font-bold">Residents</span>
             <span className="text-lg text-gray-500">Manage your residents</span>
         </div>
         <hr className="mt-2.5 mb-3" />
-        <TableCustom columns={columns} url={RESIDENTS_URL} onAdd={() => setIsAddResidentDialogOpen(true)}/>
+        <TableCustom columns={columns} url={RESIDENTS_URL} onAdd={() => setIsAddResidentDialogOpen(true)} onRowClicked={onRowClicked}/>
         <AddResidentDialog isOpen={isAddResidentDialogOpen} setIsOpen={setIsAddResidentDialogOpen} />
     </div>
 }
 
-export default ResidentPage;
+export default ResidentsPage;

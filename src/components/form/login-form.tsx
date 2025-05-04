@@ -10,7 +10,6 @@ import { z } from "zod";
 import { Button } from "../ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "../ui/form";
 import { Input } from "../ui/input";
-import { login } from "@/services/authService";
 
 const LoginForm: FC = () => {
     const form = useForm({
