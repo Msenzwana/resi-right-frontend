@@ -2,9 +2,9 @@
 
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarRail } from "@/components/ui/sidebar";
 import LogoIcon from "@/images/icon.png";
-import { Building2Icon, ChartArea, LocateIcon, MapPinCheck, User, UsersRoundIcon } from "lucide-react";
-import { NavUser } from "./nav-users";
+import { Building2Icon, ChartArea, MapPinCheck, UsersRoundIcon } from "lucide-react";
 import { NavMain } from "./nav-main";
+import { NavUser } from "./nav-users";
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     const data = {

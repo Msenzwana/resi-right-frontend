@@ -42,7 +42,9 @@ const RegisterForm: FC = () => {
         }
 
         register(userToRegister).then((response) => {
-            router.push("/auth/login");
+            // if (response.status === 201) {
+                router.push("/auth/login");
+            // }
         }).catch((error) => {
             console.log(error);
         })

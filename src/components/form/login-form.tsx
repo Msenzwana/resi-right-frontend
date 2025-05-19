@@ -2,6 +2,7 @@
 
 import { LoginSchema } from "@/lib/validationSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { FC } from "react";
 import { useForm } from "react-hook-form";
@@ -31,11 +32,18 @@ const LoginForm: FC = () => {
     }
 
     const onLogin = async (values: z.infer<typeof LoginSchema>) => {
-        // login(values.email, values.password).then((response) => {
-        //     console.log(response);
-        // }).catch((error) => {
-        //     console.log(error);
-        // });
+        const response = await signIn("credentials", {
+            email: values.email,
+            password: values.password,
+            redirect: false,
+        });
+
+        if (response?.error) {
+            toast.error("Invalid email or password", { position: "top-center" });
+            return;
+        }
+
+        toast.success("Login successful", { position: "top-center" });
         router.push("/resiright/dashboard");
     }
 

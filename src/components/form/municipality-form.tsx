@@ -36,7 +36,7 @@ const MunicipalityForm: FC = () => {
                             Name
                         </FormLabel>
                         <FormControl>
-                            <Input required placeholder="e.g. EThekwini Municipality" type="text" className="h-10" {...field} />
+                            <Input placeholder="e.g. EThekwini Municipality" type="text" className="h-10" {...field} />
                         </FormControl>
                         <FormMessage />
                     </FormItem>
@@ -64,7 +64,7 @@ const MunicipalityForm: FC = () => {
                             Address
                         </FormLabel>
                         <FormControl>
-                            <Input required placeholder="e.g. Anton Lembede Street, Ethekwini, 4001" type="text" className="h-10" {...field} />
+                            <Input placeholder="e.g. Anton Lembede Street, Ethekwini, 4001" type="text" className="h-10" {...field} />
                         </FormControl>
                         <FormMessage />
                     </FormItem>
@@ -78,7 +78,7 @@ const MunicipalityForm: FC = () => {
                             Telephone
                         </FormLabel>
                         <FormControl>
-                            <Input required placeholder="e.g. 0312345678" type="tel" className="h-10" {...field} />
+                            <Input placeholder="e.g. 0312345678" type="tel" className="h-10" {...field} />
                         </FormControl>
                         <FormMessage />
                     </FormItem>

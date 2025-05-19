@@ -3,14 +3,14 @@ import axios, { AxiosResponse } from "axios";
 import { LOGIN_URL, REGISTER_URL } from "./base";
 
 export const register = async (user: Register): Promise<AxiosResponse<any, any>> => {
-    try  {
+    try {
         return await axios.post(REGISTER_URL,
             user,
             {
                 headers: {
                     "Content-Type": "application/json"
                 },
-            }); 
+            });
     } catch (error) {
         return new Promise((resolve, reject) => reject(error));
     }
@@ -22,12 +22,15 @@ export const login = async (email: string, password: string): Promise<AxiosRespo
             email,
             password
         }
-        return await axios.post(LOGIN_URL, userToLogin,
+        console.log(userToLogin);
+        const response = await axios.post(LOGIN_URL, userToLogin,
             {
                 headers: {
                     "Content-Type": "application/json"
                 }
             });
+        console.log(response);
+        return response;
     } catch (error) {
         console.error(error);
         return new Promise((resolve, reject) => reject(error));
